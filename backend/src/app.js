@@ -4,7 +4,9 @@ const {graphqlHTTP} = require('express-graphql')
 
 const app = express()
 
-const userSchema = require('./schema/user')
+const isAuth = require('./middleware/auth')
+const graphqlSchema = require('./graphql/schema/index')
+const graphqlResolver = require('./graphql/resolvers/index.js')
 const Database = require('./database')
 
 //settings
@@ -13,8 +15,11 @@ app.set('PORT', process.env.PORT || 4000)
 //allow multi-cross 
 app.use(cors())
 
+app.use(isAuth)
+
 app.use('/graphql', graphqlHTTP({
-    schema: userSchema,
+    schema: graphqlSchema,
+    rootValue: graphqlResolver,
     graphiql: true
 }))
 

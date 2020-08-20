@@ -4,14 +4,7 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 
 
-const EncryptPassword = async (password)=>{
-    const salt = await bcrypt.genSalt(10)
-    return await bcrypt.hash(password, salt)
-}
 
-const comparePassword = async ( password, encryptedPassword )=>{
-    return await bcrypt.compare(password, encryptedPassword)
-}
 
 const {
     GraphQLObjectType,
