@@ -5,7 +5,7 @@ function Homepage({user}) {
     console.log(user)
     return (
         <div>
-            asdsad
+            vsadas
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 import {debounce} from 'lodash'
 import {useLazyQuery, useMutation} from '@apollo/client'
 import {withRouter} from 'react-router-dom'
@@ -8,13 +9,15 @@ import {ADD_USER} from '../../graphql/mutation/user-mutations'
 
 import userRoleValidation from '../../services/userRoleValidations'
 
+import Notification from '../../components/notification/notification'
 import CustomInput from '../../components/custom-input/custom-input'
 import CustomButton from '../../components/custom-button/custom-button'
+import RoundButton from '../../components/round-button/round-button'
 import Title from '../../components/title/title'
 import {Page, ButtonWrapper} from './signup-styles'
 
 
-function SignUp({history}) {
+function SignUp({history, authInfo, setBadNotification}) {
     const [item , setItem] = useState({
         email: '',
         username: '',
@@ -78,12 +81,20 @@ function SignUp({history}) {
         event.preventDefault()
         let {username, email, password, passwordConfirmation, role} = item
         validatePasswordConfirmation()
-        if(inputProperties.passwordConfirmBorderColor === 'red' || inputProperties.emailLoadingVerification === 'red') return alert('Uno de los datos introducidos es incorrecto')
-        const {data: addedUser} = await addUser({
-            variables:{ username, email, password, passwordConfirmation, role}
-        })
-        userRoleValidation(addedUser.addUser)
-        history.push('/homepage')
+        if(inputProperties.passwordConfirmBorderColor === 'invalid' || inputProperties.emailLoadingVerification === 'invalid') return alert('Uno de los datos introducidos es incorrecto')
+        
+        try{        
+            const {data: addedUser} = await addUser({
+                variables:{ username, email, password, passwordConfirmation, role }
+            })
+            authInfo({token: addedUser.addUser.token, expiration: addedUser.addUser.tokenExpiration})
+            console.log(addedUser.addUser)
+            userRoleValidation(addedUser.addUser.user)
+            history.push('/app/homepage')
+        }catch(e){
+            console.log(e)
+            setBadNotification({name: 'Error de conexion'})
+        }
     }
 
     const validatePasswordConfirmation = () =>{
@@ -96,6 +107,8 @@ function SignUp({history}) {
     return (
         <form onSubmit={handleSubmit}>
             <Page>
+                <Notification />
+                <RoundButton handleClick={()=>history.push('/')}/>
                 <Title>Registrarse</Title>
                 <CustomInput name='username' label='Nombre' value={item.username} handleChange={formHandler}/>
                 <CustomInput type='email' name='email' label='Correo' loading={inputProperties.emailLoadingVerification} value={item.email} handleChange={formHandler}/>
@@ -103,12 +116,19 @@ function SignUp({history}) {
                 <CustomInput name='passwordConfirmation' label='Repita su contraseña' loading={inputProperties.passwordConfirmBorderColor} value={item.passwordConfirmation} handleChange={formHandler} pattern=".{8,}"/>
 
                 <ButtonWrapper>
-                    <CustomButton onClick={()=>history.push('/')} role='secundary'>Ir a inicio</CustomButton>
                     <CustomButton role='primary'>Registrar</CustomButton>
+                    <CustomButton onClick={()=>history.push('/login')} role='secundary'>Iniciar Sesion</CustomButton>
                 </ButtonWrapper>
             </Page>
         </form>
     )
 }
 
-export default withRouter(SignUp);
+const mapDispatchtoProps = (dispatch)=>(
+    {
+        authInfo: (token)=>{dispatch({type:'SET_TOKEN', payload: token})},
+        setBadNotification: (data)=>{dispatch({type:'SET_BAD_NOTIFICATION', payload:data})}
+    }
+)
+
+export default connect(null, mapDispatchtoProps) (withRouter(SignUp));

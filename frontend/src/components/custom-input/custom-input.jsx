@@ -11,12 +11,17 @@ import VerifiedIcon from '../img/input-verification/verified.svg'
 import {rotate} from '../keyframes/keyframes'
 
 const Input = styled.input`
-    border: 1px solid ${props=> props.borderColor ? props.borderColor : 'grey'};
+    border: none;
     background: #909090;
     color: white;
     border-radius: 18px;
     padding: .8em;
     width: 18em;
+    transition: 0.3s;
+
+    &:hover{
+        background: #aaaaaa;
+    }
 `
 
 const Wrapper = styled.div`
@@ -54,7 +59,7 @@ const Label = styled.label`
     left: 3.5em;
     color: ${props => props.color ? props.color : 'white'};
     top: ${props => props.top ? props.top : ''};
-    transition: 0.3s;
+    transition: .3s;
 `
 
 const Round = styled.div`
@@ -98,7 +103,7 @@ function CustomInput({name, label, loading, handleChange, ...otherProps}) {
                 label ? 
                     <Label 
                         color={otherProps.value.length > 0 ? '#909090' : ''} 
-                        top={otherProps.value.length > 0 ? '-.4em' : ''} 
+                        top={otherProps.value.length > 0 ? '-.4em' : '1.7em'} 
                         >{label}</Label>
                     : ''
             }

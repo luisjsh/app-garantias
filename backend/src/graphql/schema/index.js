@@ -10,19 +10,19 @@ module.exports = buildSchema(`
     }
 
     type  AuthData{
-        userId: ID!
         token: String!
         tokenExpiration: Int!
+        user: User!
     }
 
     type RootQuery{
         users: [User!]!
-        getUserWithEmail(email: String!): User!
+        getUserWithEmail(email: String!): User
         login(email: String!, password: String!): AuthData!
     }
 
     type RootMutation{
-        addUser(email: String!, password: String!, username: String!, role: String): User 
+        addUser(email: String!, password: String!, username: String!, role: String): AuthData 
     }
 
     schema{

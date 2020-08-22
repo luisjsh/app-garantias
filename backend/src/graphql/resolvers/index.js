@@ -17,9 +17,11 @@ module.exports = {
     users: async ()=>{
         return await User.find()
     },
+    
     getUserWithEmail:async (args) =>{
-            return User.findOne({email: args.email})
+            return await User.findOne({email: args.email})
     },
+
     addUser: async(args)=>{
         let encryptedPassword = await EncryptPassword(args.password)
         let user = new User({
@@ -28,8 +30,14 @@ module.exports = {
             username: args.username,
             role: args.role
         })
-        return user.save()
+        let token = jwt.sign({userId: user.id, email: user.email}, Secret, {expiresIn: '1h'})
+        return {
+           token,
+           tokenExpiration: 1 ,
+           user
+        }
     },
+
     login: async ({email, password})=>{
         let user = await User.findOne({email: email})
         if(!user) throw new Error('Invalid credentials')
@@ -37,9 +45,9 @@ module.exports = {
         let token = jwt.sign({userId: user.id, email: user.email}, Secret, {expiresIn: '1h'})
         
         return {
-           userId: user.id,
            token,
-           tokenExpiration: 1 
+           tokenExpiration: 1 ,
+           user
         }
     }
 }

@@ -18,7 +18,7 @@ const Button = styled.button`
                 return `
                     color: white;
                     background: #FF6B00;
-
+                
                     &:hover, &:focus{
                         background: #DF5E00;
                     }

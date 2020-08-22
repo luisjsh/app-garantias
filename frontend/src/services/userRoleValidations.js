@@ -4,7 +4,6 @@ import store from '../redux/store'
 
 const userRoleValidation = (userData)=>{
     let {role} = userData
-    console.log(store)
     switch(role){
         
         case 'guest':
