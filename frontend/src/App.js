@@ -1,20 +1,39 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter as Router} from 'react-router-dom'
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
+import {ApolloClient, createHttpLink, InMemoryCache, ApolloProvider} from '@apollo/client'
+import {setContext} from '@apollo/client/link/context';
+
+import store from './redux/store'
 
 import Navbar from './components/navbar/navbar'
 
+import ChangePassword from './pages/changepasswordpage/changepassword'
 import LandingPage from './pages/landingpage/landingpage'
 import Homepage from './pages/homepage/homepage'
 import SignUp from './pages/signup/signup'
 import LogIn from './pages/loginpage/login'
 import UserProfile from './pages/userprofilepage/userprofilepage'
+import AddReport from './pages/addreportpage/addreportpage'
 
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000/graphql'
+})
+
+const authLink = setContext((_, { headers }) => {
+  let {auth} = store.getState() 
+  return {
+    headers: {
+      ...headers,
+      authorization: auth.token ? `${auth.token}` : "",
+    }
+  }
+});
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 })
+
 
 function App() {
   return (
@@ -24,10 +43,12 @@ function App() {
           <Route exact path='/' component={LandingPage}/>
           <Route exact path='/login' component={LogIn}/>
           <Route exact path='/signup' component={SignUp}/>
+          <Route exact path='/changepassword' component={ChangePassword}/>
           <Route path='/app/:id'> 
-            <Navbar />
-            <Route exact path='/app/homepage' component={Homepage}/>
-            <Route exact path='/app/profile' component={UserProfile}/>
+              <Navbar />
+              <Route exact path='/app/homepage' component={Homepage}/>
+              <Route exact path='/app/profile' component={UserProfile}/>
+              <Route exact path='/app/create/report' component={AddReport}/>
           </Route>
         </Switch>
       </Router>

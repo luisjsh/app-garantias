@@ -1,13 +1,13 @@
 import React from 'react';
-import styled from 'styled-components'
 import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom';
 
-import CustomButton from '../../components/custom-button/custom-button'
+import GuestPage from './usersPages/guestPages'
 
-function Homepage({user}) {
-    if(user.role === 'Guest') return <section style={{marginLeft: '5em'}}>
-        Guest Homepage <CustomButton role='primary'> Realizar reporteAAAAAAAAAA</CustomButton>
-    </section>
+function Homepage({user, history}) {
+    if(user.role === 'Guest') return (
+        <GuestPage />
+    )
 }
 
 const mapStatetoProps = ({user: {user}})=>{
@@ -16,4 +16,4 @@ const mapStatetoProps = ({user: {user}})=>{
     }
 }
 
-export default connect(mapStatetoProps) (Homepage);
+export default connect(mapStatetoProps) (withRouter(Homepage));

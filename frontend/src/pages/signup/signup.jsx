@@ -88,11 +88,9 @@ function SignUp({history, authInfo, setBadNotification}) {
                 variables:{ username, email, password, passwordConfirmation, role }
             })
             authInfo({token: addedUser.addUser.token, expiration: addedUser.addUser.tokenExpiration})
-            console.log(addedUser.addUser)
             userRoleValidation(addedUser.addUser.user)
             history.push('/app/homepage')
         }catch(e){
-            console.log(e)
             setBadNotification({name: 'Error de conexion'})
         }
     }

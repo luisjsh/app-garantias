@@ -1,21 +1,20 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import styled from 'styled-components'
 
 const Page = styled.div`
-    position: absolute
-    width;
+    position: relative;
+    width: 100%;
     height: 100%;
 `
 
 const Grid = styled.div`
-    position: absolute;
-    margin-left:4em;
+    position: relative;
     width: 100%;    
     height: 100%;
-    background: brown;
 `
 
-function UserProfile() {
+function UserProfile({user}) {
     return (
         <Page>
             <Grid>
@@ -25,4 +24,10 @@ function UserProfile() {
     )
 }
 
-export default UserProfile;
+const mapStatetoProps =({user: {user}})=>{
+    return{
+        user
+    }
+}
+
+export default connect(mapStatetoProps)(UserProfile);

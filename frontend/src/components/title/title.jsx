@@ -3,12 +3,12 @@ import styled from 'styled-components'
 
 const Text = styled.h1`
     font-weight: bold;
-    padding: 1.5em;
+    padding: ${ props => props.padding? props.padding : '1.5em'};
 `
 
-function Title({children}) {
+function Title({padding, children}) {
     return (
-        <Text>
+        <Text padding={padding}>
             {children}
         </Text>
     )

@@ -6,15 +6,15 @@ import homeSecundary from '../img/icon/navbar/home-secundary.svg'
 import profilePrimary from '../img/icon/navbar/profile-primary.svg'
 import profileSecundary from '../img/icon/navbar/profile-secundary.svg'
 
-export const Nav = styled.aside`
-    position: absolute;
+export const Nav = styled.div`
+    position: fixed;
     display: grid;
-    grid-template-rows: 1fr 8fr 1fr;
-    height: 100%;
-    width: 4em;
+    grid-template-columns: 1fr 2fr 1fr;
     background: white;
-    border-right: 1px solid black;
+    top: 0;
+    width: 100%;
     align-items: center;
+    z-index: 1;
     justify-items: center;
 `
 
@@ -34,23 +34,38 @@ export const LogOut = styled.button`
 
 export const RedirectSection = styled.div`
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content:center;
 `
 
+export const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    border-bottom: ${props => props.icon === 'home-primary' || props.icon === 'profile-primary' ? '  2px solid orange' : ''};
+    color: ${props => props.icon === 'home-primary' || props.icon === 'profile-primary' ? 'orange' : 'black'}; 
+    transition: .3s;  
+    cursor: pointer;
+
+    &:hover, focus{
+        border-bottom: 2px solid #787676;
+    }
+    `
+
+
 export const PositionTag = styled.div`
-    width: 4em;
-    height: 4em;
+    width: 3em;
+    height: 3em;
     background: url(${props => {
         switch(props.icon){
-            case 'home':
+            case 'home-secundary':
                 return homeSecundary
 
             case 'home-primary':
                 return homePrimary
             
-            case 'profile':
+            case 'profile-secundary':
                 return profileSecundary
 
             case 'profile-primary':

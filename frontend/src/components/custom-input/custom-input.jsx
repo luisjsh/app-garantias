@@ -4,9 +4,23 @@ import styled from 'styled-components'
 import emailIcon from '../img/icon/email.svg'
 import usernameIcon from '../img/icon/username.svg'
 import passwordIcon from '../img/icon/password.svg'
+
+import dniIcon from '../img/icon/dni.svg'
+import addressIcon from '../img/icon/address.svg'
+import phoneNumberIcon from '../img/icon/phoneNumber.svg'
+
+import serialNumberIcon from '../img/icon/serialNumber.svg'
+import brandIcon from '../img/icon/brand.svg'
+import modelIcon from '../img/icon/deviceModel.svg'
+
+import commentIcon from '../img/icon/comment.svg'
+
+import invoiceNumberIcon from '../img/icon/invoice.svg'
+
 import LoadingIcon from '../img/input-verification/loading.svg'
 import InvalidIcon from '../img/input-verification/invalid.svg'
 import VerifiedIcon from '../img/input-verification/verified.svg'
+
 
 import {rotate} from '../keyframes/keyframes'
 
@@ -44,7 +58,32 @@ const Icon = styled.div`
                 return passwordIcon
                 
             case 'passwordConfirmation':
-                return passwordIcon    
+                return passwordIcon
+                
+            case 'dni':
+                return dniIcon
+
+            case 'address':
+                return addressIcon
+
+            case 'phoneNumber':
+                return phoneNumberIcon
+            
+            case 'deviceModel':
+                return modelIcon
+
+            case 'deviceSerialNumber':
+                return serialNumberIcon
+                
+            case 'deviceBrand':
+                return brandIcon
+            
+            case 'reportComments':
+                return commentIcon
+
+            case 'invoiceNumber':
+                return invoiceNumberIcon
+
             default:
                 return ''
         }
@@ -60,6 +99,17 @@ const Label = styled.label`
     color: ${props => props.color ? props.color : 'white'};
     top: ${props => props.top ? props.top : ''};
     transition: .3s;
+    z-index: 0;
+
+    ${Wrapper}:hover &{
+        top:-.4em;
+        color: #909090;
+    }
+    
+    ${Wrapper}:focus-within &{
+        top:-.4em;
+        color: #909090;
+    }
 `
 
 const Round = styled.div`

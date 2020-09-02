@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     align-items:center;
 `
 
-const Roundbutton = styled.button`
+const Roundbutton = styled.div`
     border: none;
     background: url(${Cancel}) no-repeat;
     background-position: center;
@@ -48,8 +48,8 @@ const Label = styled.label`
 function RoundButton({handleClick}) {
     return (
         <Wrapper>
-        <Label>Cancelar</Label>
-        <Roundbutton onClick={handleClick}/>
+        <Label>Salir</Label>
+        <Roundbutton onClick={handleClick} tabIndex={0}/>
         </Wrapper>
     )
 }

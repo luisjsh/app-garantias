@@ -60,13 +60,13 @@ function Login({authInfo, history, setBadNotification}) {
 
     return (
         <form onSubmit={handleSubmit}>
+                <RoundButton handleClick={()=>history.push('/')}/>
             <LoginPage>
                 <Notification />
-                <RoundButton handleClick={()=>history.push('/')}/>
                 <Title>Iniciar Sesion</Title>
                 <CustomInput name='email' type='email' label='Correo' value={formData.email} onChange={formHandler}/>
                 <CustomInput name='password' type='password' label='Contraseña' value={formData.password} onChange={formHandler}/>
-                <Span>¿Olvidó su contraseña?</Span>
+                <Span onClick={()=>history.push('/changepassword')}>¿Olvidó su contraseña?</Span>
                 <CustomButton role='primary'>Iniciar Sesion</CustomButton>
                 <CustomButton onClick={()=>history.push('/signup')}role='secundary'>Registrarse</CustomButton>
             </LoginPage>
