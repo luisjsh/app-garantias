@@ -28,7 +28,6 @@ function AddReportPage({token, setBadNotification, history}) {
         invoiceNumber: '',
         invoiceFiles: []
     })
-    console.log(token)
 
     let [formStep, setFormStep] = useState('user')
     
@@ -86,8 +85,7 @@ function AddReportPage({token, setBadNotification, history}) {
                 headers: {"authorization": token}
                 ,
                 body: formData
-            }).then( response =>history.push('/app/homepage'))
-            console.log('sadsad')
+            }).then(()=>history.push('/app/homepage'))
         } catch(e){
             setBadNotification({name: 'Error de conexion'})
         }

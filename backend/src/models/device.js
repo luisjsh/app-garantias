@@ -10,9 +10,9 @@ const deviceSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
-    userPersonalInfo: {
+    personalinfo: {
         type: Schema.Types.ObjectId,
-        ref: 'userPersonalInfo'
+        ref: 'personalinfo'
     }
 })
 

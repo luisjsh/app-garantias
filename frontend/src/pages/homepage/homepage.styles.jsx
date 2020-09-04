@@ -13,6 +13,9 @@ export const Header = styled.header`
     font-weight: bold;
     font-size: 30px;
     padding: 1em;
+    position: sticky;
+    top: 20px;
+    background: white;
 `
 
 export const Section = styled.section`

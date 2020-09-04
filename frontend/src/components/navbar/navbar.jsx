@@ -1,44 +1,50 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux'
 
 import {
     Nav,
     Logo,
     LogOut,
-    PositionTag,
     RedirectSection,
     Wrapper
         } from './navbar-styles'
 
-function Navbar({history, match}){
-    let {params} = match
-    console.log(params)
-
+function Navbar({user, history, match}){
+    let {id} = match.params
     return (
         <Nav>
             <Logo/>
                 <RedirectSection>
-                    <Wrapper
-                            icon={params.id === 'homepage' ? 'home-primary' : 'home-secundary'}
-                        >
-                        <PositionTag 
-                            icon={params.id === 'homepage' ? 'home-primary' : 'home-secundary'}
-                            onClick={()=>history.push('/app/homepage')}
-                        />
+                    <Wrapper 
+                        onClick={()=>history.push('/app/homepage')}
+                        primary={ id === 'homepage' ? true : false}>
+                        Inicio
                     </Wrapper>
-
-                    <Wrapper
-                        icon={params.id === 'profile' ? 'profile-primary' : 'profile-secundary'} 
-                        >
-                        <PositionTag 
-                            icon={params.id === 'profile' ? 'profile-primary' : 'profile-secundary'} 
-                            onClick={()=>history.push('/app/profile')}
-                            />
+                    <Wrapper 
+                        onClick={()=>history.push('/app/profile')}
+                        primary={ id === 'profile' ? true : false}>
+                        Perfil                     
                     </Wrapper>
+                    {
+                        user.role === 'Admin' ?
+                            <Wrapper 
+                                onClick={()=>history.push('/app/users')}
+                                primary={ id === 'Users' ? true : false}>
+                                Usuarios                     
+                            </Wrapper>
+                            : ''
+                    }
                 </RedirectSection>
             <LogOut/>
         </Nav>
     )
 }
 
-export default withRouter(Navbar);
+const mapStatetoProps = ({user: {user}})=>{
+    return {
+        user
+    }
+}
+
+export default connect (mapStatetoProps) (withRouter(Navbar));

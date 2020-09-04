@@ -14,6 +14,18 @@ const comparePassword = async ( password, encryptedPassword )=>{
 }
 
 module.exports = {
+    user:async (args, req)=>{
+        let user = await User.findById(req.userId)
+        let token = jwt.sign({userId: user.id, email: user.email}, Secret, {expiresIn: '24h'})
+        return {
+            token,
+            tokenExpiration: 24,
+            user
+        }
+    },
+    userId: async (args, req)=>{
+        return await User.findById(args.id);
+    },
     users: async ()=>{
         return await User.find()
     },
@@ -30,10 +42,11 @@ module.exports = {
             username: args.username,
             role: args.role
         })
+        user.save()
         let token = jwt.sign({userId: user.id, email: user.email}, Secret, {expiresIn: '24h'})
         return {
            token,
-           tokenExpiration: 1 ,
+           tokenExpiration: 24 ,
            user
         }
     },
@@ -46,7 +59,7 @@ module.exports = {
         
         return {
            token,
-           tokenExpiration: 1 ,
+           tokenExpiration: 24 ,
            user
         }
     }

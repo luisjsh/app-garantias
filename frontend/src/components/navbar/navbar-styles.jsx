@@ -1,21 +1,17 @@
 import styled from 'styled-components'
 
-import homePrimary from '../img/icon/navbar/home-primary.svg'
-import homeSecundary from '../img/icon/navbar/home-secundary.svg'
-
-import profilePrimary from '../img/icon/navbar/profile-primary.svg'
-import profileSecundary from '../img/icon/navbar/profile-secundary.svg'
+import BurguerMenu from '../../components/img/icon/navbar/menu-burguer.svg'
 
 export const Nav = styled.div`
     position: fixed;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: .2fr 3.6fr .2fr;
     background: white;
     top: 0;
     width: 100%;
     align-items: center;
-    z-index: 1;
     justify-items: center;
+    z-index: 1;
 `
 
 export const Logo = styled.div`
@@ -28,8 +24,15 @@ export const Logo = styled.div`
 export const LogOut = styled.button`
     width: 40px;
     height: 40px;
-    border-radius: 100%;
-    border: 5px solid red;   
+    background: url(${BurguerMenu}) no-repeat;
+    background-size: 60%;
+    background-position: center; 
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover, &:focus{
+    }
 `
 
 export const RedirectSection = styled.div`
@@ -43,37 +46,20 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content:center;
-    border-bottom: ${props => props.icon === 'home-primary' || props.icon === 'profile-primary' ? '  2px solid orange' : ''};
-    color: ${props => props.icon === 'home-primary' || props.icon === 'profile-primary' ? 'orange' : 'black'}; 
-    transition: .3s;  
+    font-weight: ${props=>props.primary ? 'bold' : '400'};
+    color: ${props=>props.primary ? 'black' : '#777777'};
     cursor: pointer;
+    font-size: 20px;
+    margin: 4px;
+    transition: .3s; 
+    padding: .2em;
+    border-radius: 6px;
+    background: white;
 
-    &:hover, focus{
-        border-bottom: 2px solid #787676;
+
+    &:hover, &:focus{
+        background: #F0EFEF;
     }
+    
     `
 
-
-export const PositionTag = styled.div`
-    width: 3em;
-    height: 3em;
-    background: url(${props => {
-        switch(props.icon){
-            case 'home-secundary':
-                return homeSecundary
-
-            case 'home-primary':
-                return homePrimary
-            
-            case 'profile-secundary':
-                return profileSecundary
-
-            case 'profile-primary':
-                return profilePrimary
-
-            default: 
-                return ''
-        }}}) no-repeat;
-    background-size: 60%;
-    background-position: center;
-`

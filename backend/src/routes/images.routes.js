@@ -51,8 +51,8 @@ router.post('/report-upload', Auth, async (req,res)=>{
         model,
         serialNumber,
         status,
-        userAuthData: user.id,
-        userPersonalInfo: userData.id
+        user: user.id,
+        personalinfo: userData.id
     })
     deviceData.save()
 
@@ -63,8 +63,8 @@ router.post('/report-upload', Auth, async (req,res)=>{
         createdAt: currentDate(),
         invoice: invoiceNumber,
         invoiceImage: imageArray,
-        userAuthData: user.id,
-        userPersonalInfo: userData.id,
+        user: user.id,
+        personalinfo: userData.id,
         device: deviceData._id
     })
 

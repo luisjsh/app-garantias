@@ -23,7 +23,7 @@ function SignUp({history, authInfo, setBadNotification}) {
         username: '',
         password: '',
         passwordConfirmation:'',
-        role: 'guest',
+        role: 'admin',
         passwordValidated: false
     })
 

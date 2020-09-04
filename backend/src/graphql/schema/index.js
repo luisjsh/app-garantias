@@ -10,12 +10,14 @@ module.exports = buildSchema(`
     }
 
     type  AuthData{
+        id: ID!
         token: String!
         tokenExpiration: Int!
         user: User!
     }
 
     type PhoneNumber {
+        id: ID!
         number: String!
         user: User!
     }
@@ -29,10 +31,12 @@ module.exports = buildSchema(`
     }
 
     type InvoiceImage {
+        id: ID!
         path: String!
     }
 
     type Device {
+        id: ID!
         model: String!
         brand: String!
         serialNumber: String!
@@ -41,6 +45,7 @@ module.exports = buildSchema(`
     }
 
     type Report{
+        id: ID!
         issue: String
         description: String
         comments: String
@@ -55,7 +60,11 @@ module.exports = buildSchema(`
         users: [User!]!
         getUserWithEmail(email: String!): User
         login(email: String!, password: String!): AuthData!
-        Reports: [Report]
+        reports: [Report]
+        userReports: [Report]
+        report(id: String!): Report
+        user: AuthData
+        userId (id: String!): User!
     }
 
     type RootMutation{

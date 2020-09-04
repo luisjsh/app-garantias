@@ -33,9 +33,9 @@ const CardBodyText = styled.span`
     word-break: break-all;
 `
 
-function Card({title, children}) {
+function Card({title, handleClick, children}) {
     return (
-        <Wrapper>
+        <Wrapper onClick={handleClick}>
             <CardTitle>{title}</CardTitle>
             <CardBodyText>
             {children}

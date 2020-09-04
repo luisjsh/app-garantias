@@ -14,6 +14,8 @@ import SignUp from './pages/signup/signup'
 import LogIn from './pages/loginpage/login'
 import UserProfile from './pages/userprofilepage/userprofilepage'
 import AddReport from './pages/addreportpage/addreportpage'
+import ReportPage from './pages/reportpage/reportpage'
+import UsersPage from './pages/userspage/userspage'
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql'
@@ -47,8 +49,10 @@ function App() {
           <Route path='/app/:id'> 
               <Navbar />
               <Route exact path='/app/homepage' component={Homepage}/>
-              <Route exact path='/app/profile' component={UserProfile}/>
+              <Route exact path='/app/user/:profileId' component={UserProfile}/>
+              <Route exact path='/app/users' component={UsersPage}/>
               <Route exact path='/app/create/report' component={AddReport}/>
+              <Route exact path='/app/report/:reportNumber'  component={ReportPage} />
           </Route>
         </Switch>
       </Router>

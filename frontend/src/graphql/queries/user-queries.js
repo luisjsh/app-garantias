@@ -26,7 +26,8 @@ export const LOGIN = gql`
 
 export const GET_REPORTS = gql`
     {
-       Reports{
+       userReports{
+           id
            issue
            comments
            device{
@@ -34,5 +35,75 @@ export const GET_REPORTS = gql`
                 brand
            }
        }
+    }
+`
+
+export const GET_REPORT = gql`
+    query report($id: String!){
+        report(id: $id){
+            issue
+            comments
+            createdAt
+            description
+            invoice
+            device{
+                model
+                brand
+                status
+            }
+        }
+    }
+`
+
+export const GET_USER = gql`
+    {
+        user{
+            token
+            tokenExpiration
+            user{
+                id
+                email
+                username
+                role
+            }
+        }
+    }
+`
+
+export const GET_ALL_REPORTS = gql`
+    {
+        reports {         
+            id  
+            issue
+            comments
+            createdAt
+            description
+            invoice
+            device{
+                model
+                brand
+                status
+            }
+        }
+    }
+`
+
+export const GET_USERS = gql`
+    {
+        users{
+            id
+            email
+            role
+        }
+    }
+`
+
+export const GET_USER_ID = gql`
+    query userId($id: String!){
+        userId(id: $id){
+            id
+            email
+            role
+        }
     }
 `
