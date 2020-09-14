@@ -1,6 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux'
+import {useLazyQuery} from '@apollo/client'
+
+import ErrorHandler from '../../helper/errorHandler'
+
+import {GET_USER} from '../../graphql/queries/user-queries'
+import userRoleValidation from '../../services/userRoleValidations'
+
 
 import {
     Nav,
@@ -10,8 +17,34 @@ import {
     Wrapper
         } from './navbar-styles'
 
-function Navbar({user, history, match}){
+function Navbar({user, authInfo, history, match}){
     let {id} = match.params
+    let [getUser, {loading, data}] = useLazyQuery(GET_USER)
+
+    const fetchUser=()=>{
+        if(!loading){getUser()}
+    }
+
+    const setUser=()=>{
+        if(data){
+            if(data.user){
+                if(data.user.__typename === 'AuthMessage'){
+                    ErrorHandler(data.user.message, history) 
+                }
+                if (data.user.__typename === 'AuthData'){
+                    authInfo(data.user)
+                    userRoleValidation(data.user.user)
+                }
+            }
+        }
+    }
+
+    useEffect(setUser, [data])
+
+    if(!data && !user){
+        fetchUser()
+    }
+
     return (
         <Nav>
             <Logo/>
@@ -47,4 +80,11 @@ const mapStatetoProps = ({user: {user}})=>{
     }
 }
 
-export default connect (mapStatetoProps) (withRouter(Navbar));
+const mapDispatchtoProps = (dispatch)=>(
+    {
+        authInfo: (token)=>{dispatch({type:'SET_TOKEN', payload: token})},
+        setBadNotification: (data)=>{dispatch({type:'SET_BAD_NOTIFICATION', payload:data})}
+    }
+)
+
+export default connect (mapStatetoProps, mapDispatchtoProps) (withRouter(Navbar));

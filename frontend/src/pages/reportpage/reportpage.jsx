@@ -1,11 +1,15 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
 import {useQuery} from '@apollo/client'
+import {connect} from 'react-redux'
+
 import styled from 'styled-components'
 
-import {GET_REPORT} from '../../graphql/queries/user-queries'
+import {GET_REPORT_ALL_DATA} from '../../graphql/queries/user-queries'
 
-import LoadingPage from '../../pages/loading-page/loading-page'
+import LoadingPage from '../loading-page/loading-page'
+
+import GarantiasPage from './garantiasReportPage'
 
 const Page = styled.div`
     margin-top: 4%;
@@ -30,16 +34,24 @@ const Section = styled.section`
     flex-direction: column;
 `
 
-function ReportPage({history, match}){
+function ReportPage({history, user, match}){
     let {reportNumber} = match.params
     
-    const {loading, error, data} = useQuery(GET_REPORT, {
+    const {loading, error, data} = useQuery(GET_REPORT_ALL_DATA, {
         variables: {
             id: reportNumber
         }
     })
 
     if (loading) return <LoadingPage />
+    
+    console.log(data)
+
+    if(user){
+        if(user.role === 'Garantias' || user.role === 'Admin')return(
+            <GarantiasPage data={data} params={reportNumber} />
+        )
+    }
 
     if(data){
         if(data.report) return (
@@ -59,4 +71,10 @@ function ReportPage({history, match}){
     }
 }
 
-export default withRouter(ReportPage)
+const mapStatetoProps = ({user: {user}})=>{
+    return {
+        user
+    }
+}
+
+export default connect (mapStatetoProps) (withRouter(ReportPage))

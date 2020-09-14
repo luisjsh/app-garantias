@@ -36,7 +36,6 @@ export const Page = styled.div`
     height: 100%;
     overflow-y: auto;
     display: grid;
-    grid-template-columns: 1.5fr 2.5fr;
 `
 
 export const Section = styled.section`
@@ -96,10 +95,11 @@ export const Button = styled.button`
         content: '\\${props => props.content ? props.content : ''}';
     }
 `
-
+/*
 export const ImgSide = styled.div`
     position: relative;
     width: 100%;
     height: 100%;
     background: linear-gradient(to bottom, rgba(243,88,0,1) 0%, rgba(255,153,0,1) 100%);
 `
+*/

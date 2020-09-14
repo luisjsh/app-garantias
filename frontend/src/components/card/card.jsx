@@ -4,10 +4,9 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
     padding: .5em;
     border-radius: 10px;
-    background-color: orange;
-    color: white;
-    max-width: 1fr;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    color: black;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
     transition: 0.3s;
     cursor:pointer;
     max-height: 20em;
@@ -23,11 +22,12 @@ const Wrapper = styled.div`
 
 const CardTitle = styled.h1`
     font-weight: bold;
+    word-break: break-all;
 `
 
 const CardBodyText = styled.span`
     font-size: light;
-    color: white;
+    color: black;
     font-weight: 300;
     font-size: 14px;
     word-break: break-all;

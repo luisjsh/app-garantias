@@ -1,7 +1,6 @@
 import React from 'react'
 
-function Errorpage({error}) {
-    console.log(error.message)
+function Errorpage() {
     return (
         <div>
             error prro

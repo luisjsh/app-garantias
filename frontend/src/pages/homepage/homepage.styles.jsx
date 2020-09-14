@@ -2,25 +2,24 @@ import styled from 'styled-components'
 
 export const Page = styled.div`
     padding: 1em;
-    display: grid;
     margin-top: 5%;
     align-items: center;
     justify-items: center;
 `
 
 export const Header = styled.header`
+    padding: .4em;
     width: 100%;
     font-weight: bold;
     font-size: 30px;
-    padding: 1em;
-    position: sticky;
-    top: 20px;
     background: white;
+    position: sticky;
+    top: 1em;
 `
 
 export const Section = styled.section`
+    padding: .4em;
     display: grid;
-    width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
     grid-gap: 1em;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 `

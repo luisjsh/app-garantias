@@ -42,3 +42,27 @@ export const ADD_REPORT = gql`
         
 `
   
+export const UPDATE_USER = gql`
+    mutation updateUser($id: String!, $email: String!, $username: String!, $password: String, $role:String!){
+        updateUser(id: $id, email: $email, username: $username, password: $password, role: $role){
+            id
+            role
+        }
+    }
+`
+
+export const UPDATE_STATUS = gql`
+mutation setNewStatus($id: String!, $reportid:String!, $status:String!){
+    setNewStatus(id: $id, reportid:$reportid, status:$status){
+      id
+      issue
+      device{
+        id
+        status
+      }
+      creator {
+        id
+      }
+    }
+  }
+`

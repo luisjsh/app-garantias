@@ -36,7 +36,7 @@ const Round = styled.div`
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-around;
-    width: 70%;
+    width: 25em;
 `
 
 function Counter({setFormSteps, Steps, currentStep}) {

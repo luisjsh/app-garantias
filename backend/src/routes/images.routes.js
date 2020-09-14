@@ -78,4 +78,8 @@ router.post('/report-upload', Auth, async (req,res)=>{
     else return res.status(404)
 })
 
+router.post('/report-update', async (req, res)=>{
+    console.log(req.body)
+})
+
 module.exports = router

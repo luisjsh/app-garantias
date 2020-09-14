@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
-import {Page, ImgSide, Section} from './addreportpage-styles'
+import {Page, Section} from './addreportpage-styles'
 
 import Counter from './counter'
 import Notification from '../../components/notification/notification'
@@ -21,7 +21,7 @@ function AddReportPage({token, setBadNotification, history}) {
         deviceBrand: '',
         deviceModel: '',
         deviceSerialNumber: '',
-        deviceStatus: 'reported',
+        deviceStatus: 'Esperando confirmacion',
         reportIssue: '',
         reportComments: '',
         reportGeneralDescription: '',
@@ -139,8 +139,6 @@ function AddReportPage({token, setBadNotification, history}) {
                 />
             }
             </Section>
-            <ImgSide/>
-
            </Page>
     )
 }

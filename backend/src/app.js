@@ -3,13 +3,15 @@ const express = require('express')
 const multer = require('multer')
 const path = require('path')
 const {v1} = require('uuid')
-const {graphqlHTTP} = require('express-graphql')
+const {ApolloServer} = require('apollo-server-express')
 const app = express()
 
 const isAuth = require('./middleware/auth')
-const graphqlSchema = require('./graphql/schema/index')
-const graphqlResolver = require('./graphql/resolvers/index.js')
+const typeDefs = require('./graphql/schema/index')
+const resolvers = require('./graphql/resolvers/index.js')
 const Database = require('./database')
+
+
 
 //settings
 app.set('PORT', process.env.PORT || 4000)
@@ -28,14 +30,21 @@ app.use(isAuth)
 
 app.use('/file', require('./routes/images.routes'));
 
-app.use('/graphql',
-    graphqlHTTP({
-    schema: graphqlSchema,
-    rootValue: graphqlResolver,
-    graphiql: true
-}))
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: async ({req})=>{
+    let {isAuth, userId} = req
+    return {
+      isAuth,
+      userId
+    }
+  }
+})
+
+server.applyMiddleware({app})
 
 app.listen(app.get('PORT'), ()=>{
-    console.log(`App in port: ${app.get('PORT')}`)
+    console.log(`App in port: ${server.graphqlPath}`)
 })
 

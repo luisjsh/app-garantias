@@ -1,6 +1,5 @@
-const { buildSchema } = require('graphql')
-
-module.exports = buildSchema(`
+const {gql} = require('apollo-server-express')
+module.exports = gql`
     type User{
         id: ID!
         email: String!
@@ -23,11 +22,12 @@ module.exports = buildSchema(`
     }
 
     type UserPersonalInfo{
-        name: String!
+        id: ID
+        name: String
         address: String
-        dni: String!
-        account: User!
-        phoneNumber: [PhoneNumber!]
+        dni: String
+        user: User
+        phoneNumber: String
     }
 
     type InvoiceImage {
@@ -53,26 +53,30 @@ module.exports = buildSchema(`
         invoice: String,
         invoiceImage: [InvoiceImage]
         creator: User
+        personalinfo: UserPersonalInfo
         device: Device
     }
 
-    type RootQuery{
+    type AuthMessage{
+        message: String
+    }
+
+    union SearchResult = AuthData | AuthMessage
+
+    type Query{
         users: [User!]!
         getUserWithEmail(email: String!): User
         login(email: String!, password: String!): AuthData!
         reports: [Report]
         userReports: [Report]
         report(id: String!): Report
-        user: AuthData
+        user: SearchResult
         userId (id: String!): User!
     }
 
-    type RootMutation{
+    type Mutation{
         addUser(email: String!, password: String!, username: String!, role: String): AuthData 
+        updateUser(email: String!, password: String, username: String!, id:String!, role: String!): User
+        setNewStatus(id: String!, reportid:String!, status: String!): Report
     }
-
-    schema{
-        query: RootQuery  
-        mutation: RootMutation
-    }
-`) 
+`

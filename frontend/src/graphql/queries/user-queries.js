@@ -55,16 +55,52 @@ export const GET_REPORT = gql`
     }
 `
 
+export const GET_REPORT_ALL_DATA = gql`
+    query report($id: String!){
+        report(id: $id){
+            issue
+            comments
+            createdAt
+            description
+            invoice
+            invoiceImage{
+                path
+                id 
+            }
+            device{
+                id
+                model
+                brand
+                status
+            }
+            personalinfo{
+                name
+                address
+                phoneNumber
+            }
+        }
+    }
+`
+
 export const GET_USER = gql`
     {
         user{
-            token
-            tokenExpiration
-            user{
-                id
-                email
-                username
-                role
+
+            __typename
+
+            ... on AuthData {
+                token
+                tokenExpiration
+                user{
+                    id
+                    email
+                    username
+                    role
+                }
+            }
+
+            ... on AuthMessage {
+                message
             }
         }
     }
@@ -104,6 +140,7 @@ export const GET_USER_ID = gql`
             id
             email
             role
+            username
         }
     }
 `

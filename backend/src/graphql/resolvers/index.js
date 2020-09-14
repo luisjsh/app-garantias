@@ -1,10 +1,15 @@
-const authResolver = require('./authResolver')
-const reportResolver = require('./reportResolver')
-
+const queryResolver = require('./query/index')
+const mutationResolver = require('./mutations/index')
+const unionResolver = require('./unionResolver')
 
 const rootResolver = {
-    ...authResolver,
-    ...reportResolver
+    ...unionResolver,
+    Query: {
+    ...queryResolver
+    },
+    Mutation: {
+    ...mutationResolver
+    }
 }
 
 module.exports = rootResolver

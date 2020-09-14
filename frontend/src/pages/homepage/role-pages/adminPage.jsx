@@ -14,7 +14,6 @@ function Adminpage({history}) {
 
     let {loading, error, data} = useQuery(GET_ALL_REPORTS)
 
-    console.log(loading, error, data)
 
     if(loading) return <LoadingPage/>
 
