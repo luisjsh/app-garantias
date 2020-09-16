@@ -3,6 +3,8 @@ import store from '../redux/store'
 import Guest from '../objects/user/GuestObject'
 import Admin from '../objects/user/adminObject'
 import Garantias from '../objects/user/garantiasObject'
+import Soporte from '../objects/user/soporteObject'
+
 
 const userRoleValidation = (userData)=>{
     let {role} = userData
@@ -22,6 +24,11 @@ const userRoleValidation = (userData)=>{
             let garantias = new Garantias(userData)
             store.dispatch(setUser(garantias))
             break; 
+
+        case 'soporte':
+            let soporte = new Soporte(userData)
+            store.dispatch(setUser(soporte))
+            break;
 
 
         default:

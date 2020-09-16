@@ -10,9 +10,9 @@ import ErrorPage from '../../errorpage/errorpage'
 import Card from '../../../components/card/card'
 import CustomSelect from '../../../components/custom-select/custom-select'
 
-function Garantiaspage({history}) {
+function SoportePage({history}) {
 
-    let [condition, setCondition] = useState('Esperando confirmacion')
+    let [condition, setCondition] = useState('Esperando revisión')
 
     let {loading, error, data} = useQuery(GET_REPORTS_CONDITION, {
         variables: {
@@ -32,7 +32,7 @@ function Garantiaspage({history}) {
     if(data){
         if(data.reportsConditional) return (
             <Page >
-                <Header>Reportes por evaluar
+                <Header>Reportes por solventar
                     <CustomSelect 
                     handleChange={formHandler}
                     /></Header>
@@ -61,4 +61,4 @@ function Garantiaspage({history}) {
     )
 }
 
-export default withRouter(Garantiaspage)
+export default withRouter(SoportePage)

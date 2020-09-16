@@ -35,7 +35,7 @@ export const Aside = styled.div`
     width: auto;
     border-radius: 10px;
     position: sticky;
-    top: 5%;
+    top: 4em;
 `
 
 export const ButtonSection = styled.div`

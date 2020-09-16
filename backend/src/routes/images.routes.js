@@ -52,9 +52,9 @@ router.post('/report-upload', Auth, async (req,res)=>{
         serialNumber,
         status,
         user: user.id,
-        personalinfo: userData.id
+        personalinfo: userData.id,
+        report: false
     })
-    deviceData.save()
 
     let reportData = new report({
         issue,
@@ -65,8 +65,12 @@ router.post('/report-upload', Auth, async (req,res)=>{
         invoiceImage: imageArray,
         user: user.id,
         personalinfo: userData.id,
-        device: deviceData._id
+        device: deviceData.id
     })
+    
+    deviceData.report = reportData.id
+
+    deviceData.save()
 
     reportData.save()
     
@@ -76,10 +80,6 @@ router.post('/report-upload', Auth, async (req,res)=>{
     }
    
     else return res.status(404)
-})
-
-router.post('/report-update', async (req, res)=>{
-    console.log(req.body)
 })
 
 module.exports = router

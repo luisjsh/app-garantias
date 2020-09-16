@@ -13,6 +13,10 @@ const deviceSchema = new Schema({
     personalinfo: {
         type: Schema.Types.ObjectId,
         ref: 'personalinfo'
+    },
+    report:{
+        type: Schema.Types.ObjectId,
+        ref: 'report'
     }
 })
 

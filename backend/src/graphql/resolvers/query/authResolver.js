@@ -21,7 +21,6 @@ module.exports = {
         }
     },
     userId: async (parents, args, {isAuth, userId})=>{
-        console.log(args)
         return await User.findById(args.id);
     },
     users: async ()=>{

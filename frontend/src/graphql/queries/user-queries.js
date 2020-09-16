@@ -124,6 +124,20 @@ export const GET_ALL_REPORTS = gql`
     }
 `
 
+export const GET_REPORTS_CONDITION = gql`
+    query reportsConditional($condition: String!){
+        reportsConditional(condition: $condition){
+            id
+            report {
+                id
+                issue
+                description
+                createdAt
+            }
+        }
+    }
+`
+
 export const GET_USERS = gql`
     {
         users{

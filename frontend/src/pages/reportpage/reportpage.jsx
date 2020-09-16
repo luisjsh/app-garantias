@@ -10,6 +10,7 @@ import {GET_REPORT_ALL_DATA} from '../../graphql/queries/user-queries'
 import LoadingPage from '../loading-page/loading-page'
 
 import GarantiasPage from './garantiasReportPage'
+import SoportePage from './soporteReportPage'
 
 const Page = styled.div`
     margin-top: 4%;
@@ -37,7 +38,7 @@ const Section = styled.section`
 function ReportPage({history, user, match}){
     let {reportNumber} = match.params
     
-    const {loading, error, data} = useQuery(GET_REPORT_ALL_DATA, {
+    const {loading, data} = useQuery(GET_REPORT_ALL_DATA, {
         variables: {
             id: reportNumber
         }
@@ -45,11 +46,13 @@ function ReportPage({history, user, match}){
 
     if (loading) return <LoadingPage />
     
-    console.log(data)
-
     if(user){
         if(user.role === 'Garantias' || user.role === 'Admin')return(
             <GarantiasPage data={data} params={reportNumber} />
+        )
+
+        if(user.role === 'Soporte')return(
+            <SoportePage data={data} params={reportNumber} />
         )
     }
 

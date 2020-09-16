@@ -6,6 +6,7 @@ import LoadingPage from '../loading-page/loading-page'
 import GuestPage from './role-pages/guestPages'
 import AdminPage from './role-pages/adminPage'
 import Garantiaspage from './role-pages/garantiasPage';
+import SoportePage from './role-pages/soportePage'
 
 
 function Homepage({user, authInfo}) {
@@ -26,6 +27,10 @@ function Homepage({user, authInfo}) {
 
     if(user.role === 'Admin') return (
         <AdminPage />
+    )
+
+    if(user.role === 'Soporte') return (
+        <SoportePage />
     )
 }
 

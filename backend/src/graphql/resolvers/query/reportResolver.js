@@ -25,5 +25,14 @@ module.exports = {
             .populate('personalinfo', 'name dni address phoneNumber')
         if(!report) return {message: "The report isnt in the db"}
         return report
-    } 
+    } ,
+    reportsConditional: async (parent, {condition}, {isAuth, userId})=>{
+        if(!isAuth) return null
+        let device = await Device.find({status: condition})
+            .populate('report', 'issue comments description createdAt')
+            .populate('personalinfo', 'name dni address phoneNumber')
+
+        return device
+
+    }
 }

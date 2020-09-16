@@ -42,6 +42,7 @@ module.exports = gql`
         serialNumber: String!
         status: String!
         owner: User!
+        report: Report!
     }
 
     type Report{
@@ -72,6 +73,7 @@ module.exports = gql`
         report(id: String!): Report
         user: SearchResult
         userId (id: String!): User!
+        reportsConditional(condition: String!): [Device]
     }
 
     type Mutation{
