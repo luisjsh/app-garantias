@@ -6,12 +6,12 @@ export const Nav = styled.div`
     position: fixed;
     display: grid;
     grid-template-columns: .2fr 3.6fr .2fr;
-    background: white;
     top: 0;
     width: 100%;
     align-items: center;
     justify-items: center;
     z-index: 1;
+    background: white;
 `
 
 export const Logo = styled.div`
@@ -58,7 +58,7 @@ export const Wrapper = styled.div`
 
 
     &:hover, &:focus{
-        background: #F0EFEF;
+        background:  #F0EFEF;
     }
     
     `

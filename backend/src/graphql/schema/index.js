@@ -1,5 +1,7 @@
-const {gql} = require('apollo-server-express')
-module.exports = gql`
+const {
+    gql
+} = require('apollo-server-express')
+module.exports = gql `
     type User{
         id: ID!
         email: String!
@@ -62,7 +64,40 @@ module.exports = gql`
         message: String
     }
 
+    type NameObject {
+        id: ID
+        name: String
+    }
+
+    type Diagnosis {
+        id: ID!
+            diagnosis: String
+        actionsCorrective: String
+        actionsAditional: String
+        testResults: [NameObject]
+        biosVersion: String
+        operativeSystem: String
+        accesories: [NameObject]
+        recomendations: [NameObject]
+    }
+
+    type NeedParts {
+        id: ID!
+            diagnosis: String
+        fail: String
+        link: String
+    }
+
+
+    input Name {
+        id: ID
+        name: String!
+        status: String
+    }
+
     union SearchResult = AuthData | AuthMessage
+
+    union DiagnosisResult = AuthMessage | Report
 
     type Query{
         users: [User!]!
@@ -80,5 +115,7 @@ module.exports = gql`
         addUser(email: String!, password: String!, username: String!, role: String): AuthData 
         updateUser(email: String!, password: String, username: String!, id:String!, role: String!): User
         setNewStatus(id: String!, reportid:String!, status: String!): Report
+        setDiagnosis(reportid: String!, diagnosis: String!, status: String!, actionsCorrective: String, actionsAditional: [Name], testResults: [Name], biosVersion: String, operativeSystem: String, accesories: [Name], recomendations: [Name]): DiagnosisResult
+        setParts(reportid: String, diagnosis: String, status:String, issue: String, link: String): DiagnosisResult
     }
 `

@@ -11,18 +11,26 @@ const reportsSchema = new Schema({
         id: String,
         path: String
     }],
-    user:{
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
-    personalinfo:{
+    personalinfo: {
         type: Schema.Types.ObjectId,
         ref: 'personalinfo'
     },
-    device:{
+    device: {
         type: Schema.Types.ObjectId,
-        ref:'device'
-    } 
+        ref: 'device'
+    },
+    diagnosis: {
+        type: Schema.Types.ObjectId,
+        ref: 'diagnosis'
+    },
+    pieces: {
+        type: Schema.Types.ObjectId,
+        ref: 'pieces'
+    }
 })
 
 module.exports = mongoose.model('report', reportsSchema)

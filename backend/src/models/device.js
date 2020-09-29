@@ -6,7 +6,7 @@ const deviceSchema = new Schema({
     brand: String,
     serialNumber: String,
     status: String,
-    userAuthData:{
+    userAuthData: {
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
@@ -14,9 +14,17 @@ const deviceSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'personalinfo'
     },
-    report:{
+    report: {
         type: Schema.Types.ObjectId,
         ref: 'report'
+    },
+    diagnosis: {
+        type: Schema.Types.ObjectId,
+        ref: 'diagnosis'
+    },
+    pieces: {
+        type: Schema.Types.ObjectId,
+        ref: 'pieces'
     }
 })
 

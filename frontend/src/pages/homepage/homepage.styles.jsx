@@ -5,14 +5,13 @@ export const Page = styled.div`
     margin-top: 5%;
     align-items: center;
     justify-items: center;
-`
+    `
 
 export const Header = styled.header`
     padding: .4em;
     width: 100%;
     font-weight: bold;
     font-size: 30px;
-    background: white;
     position: sticky;
     top: 1em;
 `

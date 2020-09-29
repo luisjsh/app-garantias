@@ -41,7 +41,7 @@ export const ADD_REPORT = gql`
             } 
         
 `
-  
+
 export const UPDATE_USER = gql`
     mutation updateUser($id: String!, $email: String!, $username: String!, $password: String, $role:String!){
         updateUser(id: $id, email: $email, username: $username, password: $password, role: $role){
@@ -65,4 +65,47 @@ mutation setNewStatus($id: String!, $reportid:String!, $status:String!){
       }
     }
   }
+`
+export const ADD_DIAGNOSIS_FIXED = gql`
+    mutation setDiagnosis($reportid:String!, $diagnosis:String!, $status:String!, $actionsCorrective:String!, $actionsAditional:[Name], $testResults:[Name], $biosVersion:String, $operativeSystem: String, $accesories:[Name], $recomendations:[Name]){
+        setDiagnosis(reportid:$reportid, 
+        diagnosis:$diagnosis, 
+        status:$status,
+        actionsCorrective:$actionsCorrective, 
+        actionsAditional:$actionsAditional, 
+        testResults:$testResults, 
+        biosVersion:$biosVersion, 
+        operativeSystem:$operativeSystem, 
+        accesories:$accesories, 
+        recomendations:$recomendations){
+            
+        ...on Report{
+            id
+                device{
+                status
+                }
+            }
+        
+        ... on AuthMessage{
+            message
+        }
+        
+        }
+    }
+`
+
+export const ADD_DIAGNOSIS_NEED_PIECES = gql`
+mutation setParts($reportid: String, $diagnosis: String, $status: String, $issue: String, $link: String){
+    setParts(reportid: $reportid, diagnosis: $diagnosis, status: $status, issue: $issue, link: $link){
+        __typename
+
+        ... on Report{
+            issue
+        }
+
+        ... on AuthMessage{
+            message
+        }
+    }
+}
 `

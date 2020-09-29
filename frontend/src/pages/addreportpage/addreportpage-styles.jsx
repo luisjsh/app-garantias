@@ -63,7 +63,8 @@ export const Button = styled.button`
     font-size: 36px;
     font-weight: bold;
     border:none;
-
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.3);
+    
     ${props =>{
         switch(props.role){
             case 'primary':    

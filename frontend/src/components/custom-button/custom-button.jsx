@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const Button = styled.button`
     padding: 1em 3em;
@@ -12,46 +12,59 @@ const Button = styled.button`
     width: 100%;
     font-family: 'Roboto', sans-serif;
 
-    ${props =>{
-        switch(props.role){
-            case 'primary':    
-                return `
+    ${(props) => {
+      switch (props.role) {
+        case "primary":
+          return `
                     color: white;
                     background: #FF6B00;
                 
                     &:hover, &:focus{
                         background: #DF5E00;
                     }
-                `
-            case 'secundary':
-                return `
+                `;
+        case "secundary":
+          return `
                     color: #FF6B00;
                     background: white;
 
                     &:hover, &:focus{
                         background: #E4E4E4;
                     }
-                `
+                `;
 
-            default:
-                return ``             
-        }
+        case "APROBADO":
+          return `
+                    color: #018c0a;
+                    background: #ebffec;
+
+                    &:hover, &:focus{
+                        background: #a3ffbd;
+                    }
+                `;
+
+        case "DESAPROBADO":
+          return `
+            color: #d10404;
+            background: #fccaca;
+
+            &:hover, &:focus{
+                background: #ffabab;
+            }      
+          `;
+
+        default:
+          return ``;
+      }
     }}
-`
+`;
 
-const Wrapper = styled.div`
-    padding: 0.2em;
-    width: 100%;
-    `
-
-function CustomButton({handleClick, children, ...otherProps}) {
-    return (
-        <Wrapper>
-            <Button onClick={handleClick} {...otherProps}>
-            {children}   
-            </Button>
-        </Wrapper>
-    )
+function CustomButton({ handleClick, children, ...otherProps }) {
+  return (
+      <Button onClick={handleClick} {...otherProps}>
+        {children}
+      </Button>
+  );
 }
 
 export default CustomButton;

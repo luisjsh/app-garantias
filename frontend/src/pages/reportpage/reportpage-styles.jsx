@@ -45,7 +45,6 @@ export const ButtonSection = styled.div`
 `
 
 export const ReportNumberText = styled.h1`
-    background: white;
     padding: .5em;
     font-size: 25px;
     color: #FF6B00;

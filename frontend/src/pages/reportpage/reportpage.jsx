@@ -35,7 +35,7 @@ const Section = styled.section`
     flex-direction: column;
 `
 
-function ReportPage({history, user, match}){
+function ReportPage({user, match}){
     let {reportNumber} = match.params
     
     const {loading, data} = useQuery(GET_REPORT_ALL_DATA, {

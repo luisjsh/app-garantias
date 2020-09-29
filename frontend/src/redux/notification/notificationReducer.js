@@ -2,38 +2,40 @@ const INITIAL_STATE = {
     notificationData: []
 }
 
-const notificationReducer = (state = INITIAL_STATE, action) =>{
-    switch(action.type){
+const notificationReducer = (state = INITIAL_STATE, action) => {
+    switch (action.type) {
         case 'SET_NOTIFICATION':
 
             return {
                 notificationData: action.payload
             }
 
-        case 'SET_GOOD_NOTIFICATION':
+            case 'SET_GOOD_NOTIFICATION':
 
-            return {
-                notificationData: [
-                    ...state.notificationData,{
-                        id:state.notificationData.length + 1, 
-                        name: action.payload.name, 
-                        type:'fine'
-                }]
-            }
+                return {
+                    notificationData: [
+                        ...state.notificationData, {
+                            id: state.notificationData.length + 1,
+                            name: action.payload.name,
+                            type: 'fine'
+                        }
+                    ]
+                }
 
-        case 'SET_BAD_NOTIFICATION':
+                case 'SET_BAD_NOTIFICATION':
 
                     return {
                         notificationData: [
-                            ...state.notificationData,{
-                                id:state.notificationData.length + 1, 
-                                name: action.payload.name, 
-                                type:'notfine'
-                        }]
+                            ...state.notificationData, {
+                                id: state.notificationData.length + 1,
+                                name: action.payload,
+                                type: 'notfine'
+                            }
+                        ]
                     }
 
-        default: 
-            return state
+                    default:
+                        return state
     }
 }
 
