@@ -22,10 +22,13 @@ const deviceSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'diagnosis'
     },
-    pieces: {
-        type: Schema.Types.ObjectId,
-        ref: 'pieces'
-    }
+    pieces: [{
+        id: String,
+        name: String,
+        status: String,
+        issue: String,
+        link: String
+     }]
 })
 
 module.exports = mongoose.model('device', deviceSchema)

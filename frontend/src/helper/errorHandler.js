@@ -13,6 +13,16 @@ export default function Errorhandler(message, history) {
             store.dispatch(setBadNotification('El usuario no se encuentra registrado'))
             break;
 
+        case 'User is not authorized':
+            history.push('/app/homepage')
+            store.dispatch(setBadNotification('El usuario no se encuentra autorizado para realizar esta acción'))
+            break;
+
+        case 'Not authenticated':
+            history.push('/login')
+            store.dispatch(setBadNotification('Por favor vuelva a iniciar sesion'))
+            break;
+
         default:
 
     }

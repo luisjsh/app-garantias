@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 
 import { GET_REPORT_ALL_DATA } from "../../graphql/queries/user-queries";
 
-import { Page, Container, SideChooser } from "./addDiagnostico-styles";
+import { Page, Container, SideChooser, SecundaryText } from "./addDiagnostico-styles";
 
 import Notification from "../../components/notification/notification";
 import CorregidoStep from "./steps/Corregido-step";
@@ -16,7 +16,7 @@ import CustomInput from "../../components/custom-input/custom-input";
 function DiagnosticoPage({ match, history, user }) {
   let { reportNumber } = match.params;
 
-  const [position, setPosition] = useState("Corregido");
+  const [position, setPosition] = useState("");
 
   const [formData, setFormData] = useState({
     diagnosis: '',
@@ -41,11 +41,11 @@ function DiagnosticoPage({ match, history, user }) {
     let {name, value} = event.target
     setFormData({...formData, [name]:value})
   }
-/*
+
   if(!user){
     history.push('/app/homepage')
   }
-*/
+
   if (error) return <Page>Error</Page>;
 
   if (loading) return <Page>loading</Page>;
@@ -56,12 +56,10 @@ function DiagnosticoPage({ match, history, user }) {
         <Page>
           <Notification />
           <h1>Reporte N#{data.report.invoice}</h1>
-          <h5>
-            Equipo: {data.report.device.brand} {data.report.device.model}
-          </h5>
-          <h5>Problema: {data.report.issue}</h5>
-          <h5>Descripcion: {data.report.description}</h5>
-
+          <SecundaryText title='Equipo:'>{data.report.device.brand} {data.report.device.model}</SecundaryText>
+          <SecundaryText title='Problema:'> {data.report.issue}</SecundaryText>
+          <SecundaryText title='Descripcion:'> {data.report.description}</SecundaryText>
+          
           <h1>Diagnostico</h1>
           <CustomInput name='diagnosis' label="Diagnostico Realizado" value={formData.diagnosis} handleChange={formHandler}/>
 
@@ -85,7 +83,7 @@ function DiagnosticoPage({ match, history, user }) {
               <CorregidoStep reportid={reportNumber} formHandler={formHandler} formData={formData} setFormData={setFormData} />
             )}
 
-            {position === "Adquirir piezas" && <PiecesStep reportid={reportNumber} formData={formData} setFormData={setFormData} formHandler={formHandler}/>}
+            {position === "Adquirir piezas" && <PiecesStep reportid={reportNumber} reportData={data} diagnosis={formData.diagnosis} />}
           </Container>
         </Page>
       );

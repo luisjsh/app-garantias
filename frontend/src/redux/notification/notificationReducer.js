@@ -16,7 +16,7 @@ const notificationReducer = (state = INITIAL_STATE, action) => {
                     notificationData: [
                         ...state.notificationData, {
                             id: state.notificationData.length + 1,
-                            name: action.payload.name,
+                            name: action.payload,
                             type: 'fine'
                         }
                     ]

@@ -31,11 +31,11 @@ export const Section = styled.section`
 export const Aside = styled.div`
     display: grid;
     grid-area: aside;
-    height: 15em;
+    height: fit-content;
     width: auto;
-    border-radius: 10px;
     position: sticky;
-    top: 4em;
+    top: 0;
+    overflow-y: auto;
 `
 
 export const ButtonSection = styled.div`

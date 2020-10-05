@@ -3,6 +3,7 @@ import {useQuery} from '@apollo/client'
 import {withRouter} from 'react-router-dom'
 
 import {GET_REPORTS} from '../../../graphql/queries/user-queries'
+import Notifications from '../../../components/notification/notification'
 
 import {Page, Header, Section} from '../homepage.styles'
 import LoadingPage from '../../loading-page/loading-page'
@@ -19,6 +20,7 @@ function Guestpages({history}) {
     if(data){
         if(data.userReports) return (
             <Page >
+                <Notifications />
                 <Header>Reportes</Header>
                 <Section>
                 {

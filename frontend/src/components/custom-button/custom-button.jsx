@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
-    padding: 1em 3em;
     border-radius: 1.5em;
     border:none;
     cursor:pointer;
@@ -11,11 +10,14 @@ const Button = styled.button`
     font-weight: bold;
     width: 100%;
     font-family: 'Roboto', sans-serif;
+    display: grid;
+    grid-area: ${props => props.gridArea ? props.gridArea : ''};
 
     ${(props) => {
       switch (props.role) {
         case "primary":
           return `
+                    padding: 1em 3em;
                     color: white;
                     background: #FF6B00;
                 
@@ -25,7 +27,19 @@ const Button = styled.button`
                 `;
         case "secundary":
           return `
+                    padding: 1em 3em;
                     color: #FF6B00;
+                    background: white;
+
+                    &:hover, &:focus{
+                        background: #E4E4E4;
+                    }
+                `;
+
+        case "delete":
+          return `
+                    padding: 1em 3em;
+                    color: red;
                     background: white;
 
                     &:hover, &:focus{
@@ -35,6 +49,7 @@ const Button = styled.button`
 
         case "APROBADO":
           return `
+                    padding: 2em;
                     color: #018c0a;
                     background: #ebffec;
 
@@ -45,6 +60,7 @@ const Button = styled.button`
 
         case "DESAPROBADO":
           return `
+            padding: 2em;
             color: #d10404;
             background: #fccaca;
 

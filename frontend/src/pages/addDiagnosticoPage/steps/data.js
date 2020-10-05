@@ -45,7 +45,7 @@ export const DATA = [{
     },
     {
         id: 9,
-        name: 'Wireless/Bluetooth',
+        name: 'Wireless / Bluetooth',
         status: 'APROBADO'
     },
     {

@@ -11,6 +11,7 @@ const currentDate = require('../services/setActualDate')
 
 router.post('/report-upload', Auth, async (req,res)=>{
     let user = await User.findById(req.userId)
+
     if(user.role == 'guest' || user.role == 'admin'){
     let {name, dni, address, phoneNumber, brand, model, status, serialNumber, issue, comments, description, invoiceNumber} = req.body
 
@@ -79,7 +80,9 @@ router.post('/report-upload', Auth, async (req,res)=>{
     return res.status(200).json({status: 200})
     }
    
-    else return res.status(404)
+    else return res.status(200).json({
+        message: 'User is not authorized'
+    })
 })
 
 module.exports = router

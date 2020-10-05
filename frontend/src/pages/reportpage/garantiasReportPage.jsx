@@ -43,7 +43,7 @@ function Garantiasreportpage({data, params}){
                     <SecundaryText name='deviceModel' title='Equipo: '>{data.report.device.brand} {data.report.device.model}</SecundaryText>
                     <SecundaryText name='reportComments' title='Fecha de reporte: '>{data.report.createdAt}</SecundaryText> 
                     <SecundaryText name='reportIssue' title='Problema: '> {data.report.issue}</SecundaryText>
-                    <SecundaryText name='reportGeneralDescription' title='Estado del equipo: '>{data.report.description}</SecundaryText>
+                    <p>{data.report.description}</p>
                 </Section>
                 
                 <Aside>

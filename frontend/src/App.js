@@ -25,8 +25,13 @@ const httpLink = createHttpLink({
 
 const Page = styled.div`
   width: 100%;
-  height: 100%;
-  position: absolute;
+  height: auto;
+  display: flex;
+  justify-content: center;
+`
+
+const InnerPage = styled.div `
+  width: 1368px;
 `
 
 const authLink = setContext((_, { headers }) => {
@@ -41,13 +46,21 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+    onError: ({
+      networkError,
+      graphQLErrors
+    }) => {
+      console.log('network error =>', networkError)
+      console.log('graphql Error =>', graphQLErrors)
+    }
 })
 
 
 function App() {
   return (
     <Page>
+      < InnerPage >
       <ApolloProvider client={client}>
         <Router>
           <Switch>
@@ -68,6 +81,7 @@ function App() {
           </Switch>
         </Router>
       </ApolloProvider>
+      </InnerPage>
     </Page>
   );
 }

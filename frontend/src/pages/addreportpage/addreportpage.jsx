@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
+import errorHandler from '../../helper/errorHandler'
+
 import { Page, Section } from "./addreportpage-styles";
 
 import Counter from "./counter";
@@ -12,7 +14,7 @@ import DeviceInformation from "./form-steps/deviceInformation";
 import ProblemInformation from "./form-steps/problemInformation";
 import InvoiceInformation from "./form-steps/invoiceInformation";
 
-function AddReportPage({ token, setBadNotification, history }) {
+function AddReportPage({ token, setBadNotification, setGoodNotification, history }) {
   let [formValues, setFormValues] = useState({
     username: "",
     dni: "",
@@ -84,7 +86,13 @@ function AddReportPage({ token, setBadNotification, history }) {
         method: "POST",
         headers: { authorization: token },
         body: formData,
-      }).then(() => history.push("/app/homepage"));
+      }).then(async (response) => {
+          let {message} = await response.json()
+          if(message !== false) return errorHandler(message, history)
+          history.push('/app/homepage') 
+          setGoodNotification('Reporte agregado exitosamente')
+        }
+        );
     } catch (e) {
       setBadNotification("Error de conexion");
     }
@@ -146,8 +154,11 @@ const mapDispatchtoProps = (dispatch) => ({
   authInfo: (token) => {
     dispatch({ type: "SET_TOKEN", payload: token });
   },
-  setBadNotification: (data) => {
-    dispatch({ type: "SET_BAD_NOTIFICATION", payload: data });
+  setGoodNotification: (message)=>{
+    dispatch({ type: "SET_GOOD_NOTIFICATION", payload: message})
+  },
+  setBadNotification: (message) => {
+    dispatch({ type: "SET_BAD_NOTIFICATION", payload: message });
   },
 });
 

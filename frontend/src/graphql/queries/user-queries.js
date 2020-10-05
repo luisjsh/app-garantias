@@ -72,6 +72,13 @@ export const GET_REPORT_ALL_DATA = gql`
                 model
                 brand
                 status
+                pieces {
+                    id
+                    name
+                    status
+                    issue
+                    link
+                }
             }
             personalinfo{
                 name
@@ -125,15 +132,25 @@ export const GET_ALL_REPORTS = gql`
 `
 
 export const GET_REPORTS_CONDITION = gql`
-    query reportsConditional($condition: String!){
-        reportsConditional(condition: $condition){
-            id
-            report {
-                id
-                issue
-                description
-                createdAt
-            }
+query reportsCondition($conditions: [ReportCondition]) {
+        reportsCondition(conditions: $conditions) {
+                __typename
+
+                    ...on DeviceList {
+                        device {
+                            brand
+                            status
+                            report {
+                                id
+                                issue
+                                description
+                                }
+                                }
+                                }
+
+                                ...on AuthMessage {
+                                    message
+    }
         }
     }
 `

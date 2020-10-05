@@ -27,7 +27,19 @@ function SoporteReportPage({data, history, params}) {
                 <SecundaryText name='reportGeneralDescription'>{data.report.description}</SecundaryText>
             </Section>
             <Aside>
-                'asda'
+                <div>
+                    <h1>Piezas necesarias</h1>
+                {
+                    data.report.device.pieces.map( ({name, status, issue, link}) =>(                   
+                        <div>
+                            <h3>{name}</h3>
+                            <span>{status}</span>
+                            <span>{issue}</span>
+                            <a>{link}</a>
+                        </div>
+                    ))
+                }
+                </div>
             </Aside>
             <ButtonSection>
                 <CustomButton role='primary' onClick={()=>history.push(`/app/create/diagnostico/${params}`)}>Realizar Diagnostico</CustomButton>

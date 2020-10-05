@@ -95,12 +95,18 @@ export const ADD_DIAGNOSIS_FIXED = gql`
 `
 
 export const ADD_DIAGNOSIS_NEED_PIECES = gql`
-mutation setParts($reportid: String, $diagnosis: String, $status: String, $issue: String, $link: String){
-    setParts(reportid: $reportid, diagnosis: $diagnosis, status: $status, issue: $issue, link: $link){
+mutation setParts($reportid:String, $diagnosis:String, $status:String, $piece: [Pieces]){
+    setParts(reportid:$reportid, status:$status, piece:$piece, diagnosis:$diagnosis){
         __typename
 
         ... on Report{
             issue
+              device {
+              status
+              pieces {
+                name
+              }
+            }
         }
 
         ... on AuthMessage{

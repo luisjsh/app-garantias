@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 export const Page = styled.div`
-  padding: 1.7em;
+  padding: 1em;
 `;
 export const Container = styled.div`
   padding: 1em;
-  background: #eeeeee;
+  background: #dcdbdb;
   transition: 0.3s;
   border-radius: 20px;
+  height: fit-content;
 `;
 
 export const Wrapper = styled.div`
@@ -36,9 +37,9 @@ export const Span = styled.button`
 
 export const Grid = styled.div`
 display: grid;
-justify-items: center;
-grid-gap: 0.4em;
-grid-template-columns: repeat(auto-fill, minmax(10em, 14em));
+grid-gap: 0.5em;
+grid-template-columns: repeat(auto-fill, minmax(9em, 10em));
+justify-content: center;
 `;
 
 
@@ -49,8 +50,8 @@ const SectionTitle = styled.h1``;
 const SectionComment = styled.span`
   font-size: 14px;
   margin: 1em 0;
-  font-weight: bold;
-`;
+  color: #909090;
+  `;
 
 const SectionCommentAproved = styled.span`
   font-size: 14px;
@@ -75,11 +76,23 @@ const SectionCommentUnaproved = styled.span`
 const SectionBody = styled.section`
   display: grid;
   grid-gap: 1em;
+  grid-area: ${props => props.gridArea ? props.gridArea : ''};
 `;
 
 const SectionFooter = styled.div`
   padding: 0.4em 0;
 `;
+
+const SecundaryTitle = styled.h3`
+  font-weight: bold;
+  font-size: 1.3em;
+`
+
+const P = styled.p`
+  font-size: 1.3em;
+  margin-left: 3px;
+  font-weight: 400;
+  `
 
 export function Section({
   children,
@@ -87,9 +100,10 @@ export function Section({
   comment,
   commentAproved,
   commentUnaproved,
+  gridArea
 }) {
   return (
-    <SectionBody>
+    <SectionBody gridArea={gridArea}>
       <SectionHeader>
         <SectionTitle>{title}</SectionTitle>
       </SectionHeader>
@@ -122,4 +136,13 @@ export function SideChooser({ steps, position, handleClick }) {
       ))}
     </Wrapper>
   );
+}
+
+export function SecundaryText({children, title}){
+  return (
+    <div style={{display: 'flex', alignItems: 'center'}}>
+      <SecundaryTitle>{title}</SecundaryTitle>
+      <P>{children}</P>
+    </div>
+  )
 }

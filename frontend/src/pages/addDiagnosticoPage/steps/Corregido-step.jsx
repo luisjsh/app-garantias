@@ -75,7 +75,11 @@ function CorregidoStep({reportid, setBadNotification, formData, setFormData, for
               setBadNotification
             )
           }
-          handleClick={deleteFormData}
+          handleClick={(event) => deleteFormData(
+            event,
+            formData,
+            setFormData
+          )}
           handleClickSpan={(event) =>
             handleClickTextInputBox(
               event,
@@ -161,7 +165,11 @@ function CorregidoStep({reportid, setBadNotification, formData, setFormData, for
               setBadNotification
             )
           }
-          handleClick={deleteFormData}
+          handleClick={(event) => deleteFormData(
+            event,
+            formData,
+            setFormData
+          )}
           handleClickSpan={(event) =>
             handleClickTextInputBox(
               event,

@@ -38,13 +38,13 @@ export const handleClickTextInputBox = (event, oldArrayName, oldArray, formData,
     });
 };
 
-export const deleteFormData = (event, formData, setFormData) => {
+export const deleteFormData = (event, oldArray, setOldArray) => {
     event.preventDefault();
     let {
         name
     } = event.target;
-    setFormData({
-        ...formData,
+    setOldArray({
+        ...oldArray,
         [name]: ""
     });
 };

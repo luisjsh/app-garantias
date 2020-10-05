@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import BurguerMenu from '../../components/img/icon/navbar/menu-burguer.svg'
 
 export const Nav = styled.div`
-    position: fixed;
+    position: relative;
     display: grid;
     grid-template-columns: .2fr 3.6fr .2fr;
     top: 0;
@@ -11,7 +11,6 @@ export const Nav = styled.div`
     align-items: center;
     justify-items: center;
     z-index: 1;
-    background: white;
 `
 
 export const Logo = styled.div`

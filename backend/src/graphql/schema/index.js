@@ -37,6 +37,14 @@ module.exports = gql `
         path: String!
     }
 
+    type Piece {
+        id: ID
+        status: String
+        name: String
+        issue: String
+        link: String
+    }
+
     type Device {
         id: ID!
         model: String!
@@ -45,6 +53,7 @@ module.exports = gql `
         status: String!
         owner: User!
         report: Report!
+        pieces: [Piece]
     }
 
     type Report{
@@ -71,7 +80,7 @@ module.exports = gql `
 
     type Diagnosis {
         id: ID!
-            diagnosis: String
+        diagnosis: String
         actionsCorrective: String
         actionsAditional: String
         testResults: [NameObject]
@@ -95,9 +104,28 @@ module.exports = gql `
         status: String
     }
 
+    input Pieces {
+        id: ID
+        name: String
+        status: String
+        issue: String
+        link: String
+    }
+
+    type DeviceList {
+        device: [Device]
+    }
+
+    input ReportCondition {
+        id: ID
+        condition: String
+    }
+
     union SearchResult = AuthData | AuthMessage
 
     union DiagnosisResult = AuthMessage | Report
+
+    union ReportsWrapper = AuthMessage | DeviceList
 
     type Query{
         users: [User!]!
@@ -108,7 +136,7 @@ module.exports = gql `
         report(id: String!): Report
         user: SearchResult
         userId (id: String!): User!
-        reportsConditional(condition: String!): [Device]
+        reportsCondition(conditions: [ReportCondition]): ReportsWrapper
     }
 
     type Mutation{
@@ -116,6 +144,6 @@ module.exports = gql `
         updateUser(email: String!, password: String, username: String!, id:String!, role: String!): User
         setNewStatus(id: String!, reportid:String!, status: String!): Report
         setDiagnosis(reportid: String!, diagnosis: String!, status: String!, actionsCorrective: String, actionsAditional: [Name], testResults: [Name], biosVersion: String, operativeSystem: String, accesories: [Name], recomendations: [Name]): DiagnosisResult
-        setParts(reportid: String, diagnosis: String, status:String, issue: String, link: String): DiagnosisResult
+        setParts(reportid: String, status: String, piece: [Pieces], diagnosis: String): DiagnosisResult
     }
 `

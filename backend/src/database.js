@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-let internetConnection = false;
+let internetConnection = true;
 let URI = "";
 
 if (internetConnection) {

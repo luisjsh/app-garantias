@@ -64,18 +64,8 @@ module.exports = {
             })
 
             setDiagnosis.save()
-
-            console.log(setDiagnosis)
             let report = await Report.findById(reportid)
                 .populate('device', 'id')
-
-            await Device.updateOne({
-                _id: reportid
-            }, {
-                $set: {
-                    diagnosis: setDiagnosis.id
-                }
-            })
             await Device.updateOne({
                 _id: report.device.id
             }, {
@@ -100,45 +90,32 @@ module.exports = {
         }
         let user = await User.findById(userId)
         if (user.role === 'admin' || user.role === 'soporte') {
+                    let {
+                        reportid,
+                        diagnosis,
+                        status,
+                        piece
+                    } = args
 
-            let {
-                reportid,
-                diagnosis,
-                issue,
-                link
-            } = args
-
-
-            let setPieces = new Diagnosis({
-                reportid,
-                diagnosis,
-                issue,
-                link
-            })
-
-            setPieces.save()
-
-            let report = await Report.findById(reportid)
-                .populate('device', 'id')
-
-            await Device.updateOne({
-                _id: reportid
-            }, {
-                $set: {
-                    pieces: setPieces.id
-                }
-            })
-            await Device.updateOne({
-                _id: report.device.id
-            }, {
-                $set: {
-                    status: status,
-                    pieces: setPieces.id
-                }
-            })
-            return await Report.findById(reportid)
-                .populate('device', 'model brand serialNumber status')
-                .populate('personalinfo', 'name dni address phoneNumber')
+                    try {
+                        let report = await Report.findById(reportid)
+                        .populate('device', 'id pieces')
+                    await Device.updateOne({
+                        _id: report.device.id
+                    }, {
+                        $set: {
+                            status: status,
+                            pieces: piece
+                        }
+                    })
+                    return await Report.findById(reportid)
+                        .populate('device', 'model brand serialNumber pieces status')
+                        .populate('personalinfo', 'name dni address phoneNumber')
+                    } catch (e) {
+                        return {
+                            message: 'bad report id'
+                        }
+                    }
         } else return {
             message: 'User is not authorized'
         }
