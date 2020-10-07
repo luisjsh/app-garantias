@@ -16,7 +16,7 @@ function SoportePage({history}) {
 
     let [conditions, setCondition] = useState([{
         id: 0, condition: "Esperando piezas"
-    }, {id: 1, condition: "Esperando revision"}])
+    }, {id: 1, condition: "Esperando revisión"}])
 
     let {loading, error, data} = useQuery(GET_REPORTS_CONDITION, {
         variables: {
@@ -33,6 +33,8 @@ function SoportePage({history}) {
     
     if(error) return <ErrorPage />
       
+    console.log(data)
+
     if(data){
         if(data.AuthMessage) return errorHandler(data.AuthMessage.message, history)
 
@@ -48,7 +50,7 @@ function SoportePage({history}) {
                     
                     data.reportsCondition.device.map( ({status, report}, ID)=>(
                          status === "Esperando piezas" &&
-                          <Card key={ID} reportId={report.id} handleClick={()=>history.push(`/app/report/${report.id}`)} title={report.issue}>
+                          <Card key={ID} reportId={report.id} secondsAppear={ID} handleClick={()=>history.push(`/app/report/${report.id}`)} title={report.issue}>
                             {report.description}
                             </Card>
                     )):
@@ -56,13 +58,13 @@ function SoportePage({history}) {
                     <NoData />
                 }
                 </Section>
-                <Section title='Esperando por revision'>
+                <Section title="Esperando revisión">
                 {
                     data.reportsCondition.device.length > 0 ? 
                     
                     data.reportsCondition.device.map( ({status, report}, ID)=>(
-                         status === "Esperando revision" &&
-                          <Card key={ID} reportId={report.id} handleClick={()=>history.push(`/app/report/${report.id}`)} title={report.issue}>
+                         status === "Esperando revisión" &&
+                          <Card key={ID} reportId={report.id} secondsAppear={ID} handleClick={()=>history.push(`/app/report/${report.id}`)} title={report.issue}>
                             {report.description}
                             </Card>
                     )):

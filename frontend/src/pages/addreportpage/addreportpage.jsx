@@ -23,7 +23,7 @@ function AddReportPage({ token, setBadNotification, setGoodNotification, history
     deviceBrand: "",
     deviceModel: "",
     deviceSerialNumber: "",
-    deviceStatus: "Esperando confirmacion",
+    deviceStatus: "Esperando confirmación",
     reportIssue: "",
     reportComments: "",
     reportGeneralDescription: "",
@@ -88,9 +88,11 @@ function AddReportPage({ token, setBadNotification, setGoodNotification, history
         body: formData,
       }).then(async (response) => {
           let {message} = await response.json()
-          if(message !== false) return errorHandler(message, history)
-          history.push('/app/homepage') 
-          setGoodNotification('Reporte agregado exitosamente')
+          if(!message){
+            history.push('/app/homepage') 
+            setGoodNotification('Reporte agregado exitosamente')
+          } 
+          return errorHandler(message, history)
         }
         );
     } catch (e) {

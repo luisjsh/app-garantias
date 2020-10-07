@@ -1,5 +1,16 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
+
+const CardAppear = keyframes`
+    0%{
+        transform: translateY(50px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+`
 
 const Wrapper = styled.div`
     display: grid;
@@ -7,6 +18,7 @@ const Wrapper = styled.div`
     "title"
     "reportNumber"
     "description";
+    opacity: 0;
     height: fit-content;
     grid-gap: .4em;
     padding: .5em;
@@ -17,9 +29,10 @@ const Wrapper = styled.div`
     transition: 0.3s;
     cursor:pointer;
     max-height: 9em;
+    animation: ${CardAppear} 1s ${props => props.secondsAppear ? `.${props.secondsAppear}s` : ''} forwards;
 
     &:hover, &:focus-within{
-        transform: translate(0, -10px)
+        transform: scale(0, -10px)
     }
 
     &:active{
@@ -49,9 +62,9 @@ const Paragraph = styled.p`
     margin: 0;
 `
 
-function Card({title, reportId, handleClick, children}) {
+function Card({title, reportId, handleClick, children, secondsAppear}) {
     return (
-        <Wrapper onClick={handleClick}>
+        <Wrapper onClick={handleClick} secondsAppear={secondsAppear}>
             <CardBodyText gridArea='createdAt'>Creado hace 4 dias</CardBodyText>
             <CardTitle gridArea='title'>{title}</CardTitle>
             <CardBodyText gridArea='reportNumber'>{reportId}</CardBodyText>

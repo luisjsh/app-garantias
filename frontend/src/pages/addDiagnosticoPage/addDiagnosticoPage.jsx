@@ -5,8 +5,9 @@ import {connect} from 'react-redux'
 
 import { GET_REPORT_ALL_DATA } from "../../graphql/queries/user-queries";
 
-import { Page, Container, SideChooser, SecundaryText } from "./addDiagnostico-styles";
+import { Page, Container, SideChooser } from "./addDiagnostico-styles";
 
+import SecundaryText from '../../components/secundary-text/secundary-text'
 import Notification from "../../components/notification/notification";
 import CorregidoStep from "./steps/Corregido-step";
 import PiecesStep from "./steps/Piece-step";

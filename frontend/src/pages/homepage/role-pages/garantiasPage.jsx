@@ -14,7 +14,7 @@ import CustomSelect from '../../../components/custom-select/custom-select'
 function Garantiaspage({history}) {
 
     let [conditions, setCondition] = useState([{
-        id: 1, condition: 'Esperando confirmacion'}])
+        id: 1, condition: 'Esperando confirmación'}])
 
     let {loading, error, data} = useQuery(GET_REPORTS_CONDITION, {
         variables: {

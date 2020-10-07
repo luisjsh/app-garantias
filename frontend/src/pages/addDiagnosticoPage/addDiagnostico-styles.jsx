@@ -83,16 +83,6 @@ const SectionFooter = styled.div`
   padding: 0.4em 0;
 `;
 
-const SecundaryTitle = styled.h3`
-  font-weight: bold;
-  font-size: 1.3em;
-`
-
-const P = styled.p`
-  font-size: 1.3em;
-  margin-left: 3px;
-  font-weight: 400;
-  `
 
 export function Section({
   children,
@@ -138,11 +128,4 @@ export function SideChooser({ steps, position, handleClick }) {
   );
 }
 
-export function SecundaryText({children, title}){
-  return (
-    <div style={{display: 'flex', alignItems: 'center'}}>
-      <SecundaryTitle>{title}</SecundaryTitle>
-      <P>{children}</P>
-    </div>
-  )
-}
+

@@ -7,13 +7,12 @@ import {Page,
         Header,
         Section, 
         Title, 
-        Aside,
         ButtonSection,
         ReportNumberText} from './reportpage-styles'
 
 import {UPDATE_STATUS} from '../../graphql/mutation/user-mutations'
 
-
+import Aside from '../../components/aside/aside'
 import SecundaryText from '../../components/secundary-text-with-images/secundary-text-with-images'
 import CustomButton from '../../components/custom-button/custom-button'
 

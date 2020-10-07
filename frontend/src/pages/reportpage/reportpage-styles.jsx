@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Page = styled.div`
-    margin-top: 4%;
     padding: 2em;
     display: grid;
     grid-gap: 1em;
@@ -10,6 +9,18 @@ export const Page = styled.div`
         "header aside"
         "section  aside"
         "buttonSection aside";
+
+    @media (max-width: 700px){
+        padding-left: .2em;
+        padding-right: .2em;
+        padding-top: 0;
+        grid-gap: 1em;
+        grid-template-areas:
+        "header header"
+        "section section"
+        "aside aside"
+        "buttonSection buttonSection";
+    }
 `
 
 export const Header = styled.header`
@@ -17,6 +28,13 @@ export const Header = styled.header`
     align-items: center;
     grid-area: header;
     flex-direction: rows;
+
+    @media (max-width: 700px){
+        justify-content: center;
+        position: sticky;
+        background: #f2f2f2;
+        top: 0;
+    }
 `
 
 export const Title = styled.div`
@@ -27,21 +45,22 @@ export const Section = styled.section`
     display: flex;
     flex-direction: column;
     grid-area: section;
-`
-export const Aside = styled.div`
-    display: grid;
-    grid-area: aside;
-    height: fit-content;
-    width: auto;
-    position: sticky;
-    top: 0;
-    overflow-y: auto;
-`
+    border-radius: 10px;
 
+    @media (max-width: 700px){
+        background-color: white;
+        padding: 1em;
+
+    }
+`
 export const ButtonSection = styled.div`
     grid-area: buttonSection;
     display: grid;
-    grid-template-columns: 12em 16em;
+    grid-template-columns: 15em;
+    @media (max-width: 7px){
+        grid-gap: .3em;
+        grid-template-columns: 2fr;
+    }
 `
 
 export const ReportNumberText = styled.h1`
@@ -50,3 +69,4 @@ export const ReportNumberText = styled.h1`
     color: #FF6B00;
     border-radius: 2em;
 `
+

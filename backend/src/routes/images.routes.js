@@ -74,8 +74,6 @@ router.post('/report-upload', Auth, async (req,res)=>{
     deviceData.save()
 
     reportData.save()
-    
-    deviceData.owner = user
 
     return res.status(200).json({status: 200})
     }

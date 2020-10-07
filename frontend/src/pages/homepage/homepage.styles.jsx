@@ -7,29 +7,36 @@ export const Page = styled.div`
   padding: 1em;
   align-items: center;
   justify-items: center;
+
+  @media (max-width: 700px){
+    padding: .3em;
+  }
 `;
 
 export const Header = styled.header`
-    padding: .4em;
     font-weight: bold;
+    padding: .2em;
     font-size: 30px;
-    position: sticky;
     display: grid;
+    position: sticky;
     grid-gap: .2em;
     grid-template-columns: 2fr 2fr;
     background-color: #f2f2f2;
     top: 0;
+    z-index: 1;
 `
 
 const SectionBody = styled.section`
-    padding: .4em;
     display: grid;
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fill, minmax(250px, 17em));
 
     &:empty{
-      background-color: brown;
+      background: url(${NoDataImage}) no-repeat;
+      background-position: center;
+      background-size: 130px;
       padding: 7em;
+      filter: grayscale(1);
     }
 `
 const SectionTitle = styled.h3`

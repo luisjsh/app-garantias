@@ -1,50 +1,58 @@
 import React from 'react' 
 import {withRouter} from 'react-router-dom'
+import styled from 'styled-components'
 
 import {Page, 
         Header,
         Section, 
-        Title, 
-        Aside,
         ButtonSection,
         ReportNumberText} from './reportpage-styles'
 
-
-
-import SecundaryText from '../../components/secundary-text-with-images/secundary-text-with-images'
+import Title from '../../components/title/title'
+import Aside from '../../components/aside/aside'
+import Card from '../../components/tiny-card/tiny-card'
+import SecundaryText from '../../components/secundary-text/secundary-text'
 import CustomButton from '../../components/custom-button/custom-button'
+
+const ClickableAside = styled.div`
+    background: white;
+    padding: .4em;
+    border-radius: 10px;
+
+    ${Title}:hover &{
+        background-color: brown;
+    }
+`
+
+const Grid = styled.div`
+    display:grid;
+    grid-gap: 1em;
+`
+
 
 function SoporteReportPage({data, history, params}) {
     return (
         <Page>
             <Header>
-                <Title>Reporte # <ReportNumberText>{data.report.invoice}</ReportNumberText></Title>
+                <Title padding='0'>Reporte #</Title> <ReportNumberText>{data.report.invoice}</ReportNumberText>
             </Header>
             <Section>
-                <Title>Estado Actual <ReportNumberText>{data.report.device.status}</ReportNumberText></Title>
-                <SecundaryText name='deviceModel'>{data.report.device.brand} {data.report.device.model}</SecundaryText>
-                <SecundaryText name='reportIssue'>{data.report.issue}</SecundaryText>
-                <SecundaryText name='reportGeneralDescription'>{data.report.description}</SecundaryText>
+                <Title padding='0'>Estado Actual </Title><ReportNumberText>{data.report.device.status}</ReportNumberText>
+                <SecundaryText name='deviceModel' title='Equipo: '>{data.report.device.brand} {data.report.device.model}</SecundaryText>
+                <SecundaryText name='reportIssue' title='Problema:'>{data.report.issue}</SecundaryText>
+                <SecundaryText name='reportGeneralDescription' title='Descripción del equipo:'>{data.report.description}</SecundaryText>
             </Section>
-            <Aside>
-                <div>
-                    <h1>Piezas necesarias</h1>
+            <Aside title='Piezas necesarias'>
+                <Grid>
                 {
-                    data.report.device.pieces.map( ({name, status, issue, link}) =>(                   
-                        <div>
-                            <h3>{name}</h3>
-                            <span>{status}</span>
-                            <span>{issue}</span>
-                            <a>{link}</a>
-                        </div>
+                    data.report.device.pieces.map( ({id, name, status, issue, link}, i) =>(                   
+                        <Card key={id} name={name} secondsToAppear={i} status={status} issue={issue} link={link} />
                     ))
                 }
-                </div>
+                </Grid>
             </Aside>
             <ButtonSection>
                 <CustomButton role='primary' onClick={()=>history.push(`/app/create/diagnostico/${params}`)}>Realizar Diagnostico</CustomButton>
-
-                <CustomButton role='primary'>Submit</CustomButton>
             </ButtonSection>
         </Page>
     )
