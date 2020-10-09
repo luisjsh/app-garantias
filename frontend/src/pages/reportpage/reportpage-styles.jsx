@@ -28,6 +28,7 @@ export const Header = styled.header`
     align-items: center;
     grid-area: header;
     flex-direction: rows;
+    position: relative;
 
     @media (max-width: 700px){
         justify-content: center;
@@ -57,7 +58,8 @@ export const ButtonSection = styled.div`
     grid-area: buttonSection;
     display: grid;
     grid-template-columns: 15em;
-    @media (max-width: 7px){
+    @media (max-width: 700px){
+        padding: 1em;
         grid-gap: .3em;
         grid-template-columns: 2fr;
     }

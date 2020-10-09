@@ -38,7 +38,7 @@ const Section = styled.section`
 function ReportPage({user, match}){
     let {reportNumber} = match.params
     
-    const {loading, data} = useQuery(GET_REPORT_ALL_DATA, {
+    const {loading, error, data} = useQuery(GET_REPORT_ALL_DATA, {
         variables: {
             id: reportNumber
         }
@@ -46,6 +46,12 @@ function ReportPage({user, match}){
 
     if (loading) return <LoadingPage />
     
+    if (error) return (
+        <div>
+            error
+        </div>
+    )
+
     if(user){
         if(user.role === 'Garantias' || user.role === 'Admin')return(
             <GarantiasPage data={data} params={reportNumber} />

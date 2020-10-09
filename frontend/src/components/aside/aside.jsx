@@ -5,6 +5,8 @@ import Title from '../title/title'
 
 const Wrapper = styled.div`
     display: grid;
+    padding: 1em;
+    padding-top: 0;
     grid-area: aside;
     height: fit-content;
     max-height: 100%;
@@ -28,6 +30,7 @@ const Wrapper = styled.div`
 const Header = styled.div`
 @media (max-width: 700px){
     padding: .4em;
+    outline: none;
 }
 `
 

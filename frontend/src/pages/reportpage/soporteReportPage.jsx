@@ -11,6 +11,7 @@ import {Page,
 import Title from '../../components/title/title'
 import Aside from '../../components/aside/aside'
 import Card from '../../components/tiny-card/tiny-card'
+import DropdownMenu from '../../components/dropdown-menu/dropdown-menu'
 import SecundaryText from '../../components/secundary-text/secundary-text'
 import CustomButton from '../../components/custom-button/custom-button'
 
@@ -34,7 +35,20 @@ function SoporteReportPage({data, history, params}) {
     return (
         <Page>
             <Header>
-                <Title padding='0'>Reporte #</Title> <ReportNumberText>{data.report.invoice}</ReportNumberText>
+                <Title padding='0'>Reporte #</Title>
+                <ReportNumberText>{data.report.invoice}</ReportNumberText>
+                <DropdownMenu 
+                    options={
+                        [{id: 1, handleClick: ()=>{
+                            
+                        }, name: 'Editar'},
+                        {id: 2, handleClick: ()=>{
+
+                        }, name: 'Borrar'
+
+                        }]
+                    }
+                />
             </Header>
             <Section>
                 <Title padding='0'>Estado Actual </Title><ReportNumberText>{data.report.device.status}</ReportNumberText>

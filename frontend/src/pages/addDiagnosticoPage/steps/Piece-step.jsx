@@ -80,7 +80,7 @@ function PieceStep({ reportid, diagnosis, reportData, setBadNofitication, setGoo
     });
 
     if (AddedPieces.length !== DifferentsFromInput.length)
-      return alert(`${name} agregada previamente`);
+      return setBadNofitication(`El Nombre o Link que desea agregar se encuentra registrado`);
 
     setAddedPieces([
       ...AddedPieces,
